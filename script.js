@@ -1,4 +1,4 @@
-// DOM Elements
+
 const imageInput = document.getElementById('imageInput');
 const browseBtn = document.getElementById('browseBtn');
 const uploadArea = document.getElementById('uploadArea');
@@ -10,7 +10,6 @@ const sampleBtn = document.getElementById('sampleBtn');
 const loading = document.getElementById('loading');
 const resultsSection = document.getElementById('results');
 
-// Result elements
 const diseaseName = document.getElementById('diseaseName');
 const diseaseDescription = document.getElementById('diseaseDescription');
 const confidenceScore = document.getElementById('confidenceScore');
@@ -314,4 +313,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             }
         }
     });
+
 });
