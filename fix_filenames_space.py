@@ -28,7 +28,6 @@ for subdir, _, files in os.walk(root_dir):
                     break
                 counter += 1
 
-        # Rename file
         if old_path != new_path:
             print(f"Renaming -> {old_path}  -->  {new_path}")
             os.rename(old_path, new_path)
