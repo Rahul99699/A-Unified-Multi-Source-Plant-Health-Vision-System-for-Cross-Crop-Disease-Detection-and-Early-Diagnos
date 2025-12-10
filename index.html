@@ -5,69 +5,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriScan AI - Plant Disease Detection</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-theme="dark">
     
+    <!-- Toasts -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Mobile sticky CTA -->
+    <div class="mobile-cta" id="mobileCta">
+        <button class="cta-btn" id="mobileUploadBtn">
+            <i class="fas fa-cloud-upload-alt"></i> Upload
+        </button>
+        <button class="cta-btn primary" id="mobileAnalyzeBtn">
+            <i class="fas fa-search"></i> Analyze
+        </button>
+    </div>
+
     <nav class="navbar">
-        <div class="container">
+        <div class="container nav-container">
             <div class="logo">
                 <i class="fas fa-leaf"></i>
                 <span>AgriScan AI</span>
+                <span class="beta-pill">BETA</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#upload">Detect</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                <li><a href="#upload" class="nav-link">Detect</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
             </ul>
-            <button class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
+        <div class="hero-gradient"></div>
+        <div class="container hero-container">
+            <div class="hero-content reveal">
+                <p class="hero-badge">
+                    <i class="fas fa-bolt"></i> Powered by Deep Learning
+                </p>
                 <h1>AI-Powered Plant Disease Detection</h1>
                 <p>Revolutionizing agriculture with real-time, accurate disease identification using deep learning technology. Early detection for healthier crops.</p>
-                <a href="#upload" class="btn-primary">Start Detection</a>
+                <div class="hero-actions">
+                    <a href="#upload" class="btn-primary">
+                        <i class="fas fa-search"></i> Start Detection
+                    </a>
+                    <button class="btn-ghost" id="scrollToHow">
+                        <i class="fas fa-play"></i> See How it Works
+                    </button>
+                </div>
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Avg. Detection Time</span>
+                        <span class="metric-value">~2.3s</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Farmer Satisfaction</span>
+                        <span class="metric-value">4.9/5</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Scans Today</span>
+                        <span class="metric-value" id="scansToday">0</span>
+                    </div>
+                </div>
             </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plant Analysis">
+            <div class="hero-image reveal">
+                <div class="hero-card glass">
+                    <!-- You can swap this URL with your generated doctor-leaf image -->
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="AI Plant Treatment">
+                </div>
             </div>
         </div>
+        <a href="#upload" class="scroll-indicator" aria-label="Scroll to detection">
+            <span></span>
+        </a>
     </section>
 
     <!-- How It Works Section -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
-            <h2 class="section-title">How It Works</h2>
+            <h2 class="section-title reveal">How It Works</h2>
+            <p class="section-subtitle reveal">From leaf snapshot to intelligent diagnosis in seconds.</p>
             <div class="steps">
-                <div class="step">
+                <div class="step reveal">
                     <div class="step-icon">
                         <i class="fas fa-camera"></i>
                     </div>
                     <h3>1. Capture Image</h3>
                     <p>Take a clear photo of the plant leaf using your smartphone or upload an existing image.</p>
                 </div>
-                <div class="step">
+                <div class="step reveal" style="--delay:0.1s">
                     <div class="step-icon">
                         <i class="fas fa-upload"></i>
                     </div>
                     <h3>2. Upload & Analyze</h3>
                     <p>Our AI system processes the image using advanced Convolutional Neural Networks.</p>
                 </div>
-                <div class="step">
+                <div class="step reveal" style="--delay:0.2s">
                     <div class="step-icon">
                         <i class="fas fa-chart-bar"></i>
                     </div>
                     <h3>3. Get Diagnosis</h3>
                     <p>Receive instant analysis with disease name, severity level, and confidence score.</p>
                 </div>
-                <div class="step">
+                <div class="step reveal" style="--delay:0.3s">
                     <div class="step-icon">
                         <i class="fas fa-prescription-bottle-alt"></i>
                     </div>
@@ -81,34 +135,58 @@
     <!-- Upload Section -->
     <section class="upload-section" id="upload">
         <div class="container">
-            <h2 class="section-title">Detect Plant Disease</h2>
-            <p class="section-subtitle">Upload an image of a plant leaf to get instant AI-powered diagnosis</p>
+            <h2 class="section-title reveal">Detect Plant Disease</h2>
+            <p class="section-subtitle reveal">Upload an image of a plant leaf to get instant AI-powered diagnosis</p>
             
             <div class="upload-container">
-                <div class="upload-area" id="uploadArea">
+                <div class="upload-area glass reveal" id="uploadArea">
                     <i class="fas fa-cloud-upload-alt upload-icon"></i>
                     <h3>Upload Leaf Image</h3>
                     <p>Drag & drop or click to browse</p>
                     <p class="file-types">Supports: JPG, PNG, WEBP (Max 5MB)</p>
                     <input type="file" id="imageInput" accept="image/*" hidden>
-                    <button class="btn-secondary" id="browseBtn">Browse Files</button>
+                    <button class="btn-secondary" id="browseBtn">
+                        <i class="fas fa-folder-open"></i> Browse Files
+                    </button>
+                    <p class="upload-hint">
+                        <i class="fas fa-lightbulb"></i> Tip: Use a close-up image with good lighting for best results.
+                    </p>
                 </div>
                 
-                <div class="image-preview" id="imagePreview">
-                    <img id="previewImage" alt="Preview will appear here">
-                    <button class="btn-remove" id="removeBtn">
+                <div class="image-preview reveal" id="imagePreview">
+                    <div class="preview-top-bar">
+                        <span class="preview-label"><i class="fas fa-image"></i> Leaf Preview</span>
+                        <div class="view-toggle">
+                            <button class="view-btn active" id="viewOriginalBtn">Original</button>
+                            <button class="view-btn" id="viewAiBtn">AI View</button>
+                        </div>
+                    </div>
+                    <div class="preview-wrapper">
+                        <img id="previewImage" alt="Preview will appear here">
+                        <div class="ai-overlay" id="aiOverlay"></div>
+                    </div>
+                    <button class="btn-remove" id="removeBtn" aria-label="Remove image">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
+
+            <!-- Recent uploads thumbnails -->
+            <div class="upload-history reveal" id="uploadHistory">
+                <h4><i class="fas fa-clock"></i> Recent Uploads</h4>
+                <div class="thumbs" id="thumbsContainer">
+                    <p class="no-thumbs">No recent images yet.</p>
+                </div>
+            </div>
             
-            <div class="analysis-controls">
-                <button class="btn-primary" id="analyzeBtn" disabled>
+            <div class="analysis-controls reveal">
+                <button class="btn-primary" id="analyzeBtn" disabled aria-disabled="true">
                     <i class="fas fa-search"></i> Analyze Image
                 </button>
                 <button class="btn-secondary" id="sampleBtn">
                     <i class="fas fa-vial"></i> Use Sample Image
                 </button>
+                <span class="analyze-hint">No image is uploaded yet</span>
             </div>
             
             <div class="loading" id="loading">
@@ -121,14 +199,26 @@
     <!-- Results Section -->
     <section class="results-section" id="results">
         <div class="container">
-            <h2 class="section-title">Analysis Results</h2>
+            <h2 class="section-title reveal">Analysis Results</h2>
             
             <div class="results-container">
-                <div class="result-card">
+                <div class="result-card glass reveal">
+                    <div class="scan-progress" id="scanProgress">
+                        <div class="scan-bar" id="scanBar"></div>
+                    </div>
+
                     <div class="result-header">
-                        <h3><i class="fas fa-diagnoses"></i> Disease Diagnosis</h3>
-                        <div class="confidence-score">
-                            Confidence: <span id="confidenceScore">0%</span>
+                        <div class="result-header-left">
+                            <h3><i class="fas fa-diagnoses"></i> Disease Diagnosis</h3>
+                            <div class="result-tags" id="resultTags"></div>
+                        </div>
+                        <div class="confidence-wrapper">
+                            <div class="confidence-gauge" id="confidenceGauge">
+                                <div class="confidence-inner">
+                                    <span id="confidenceScore">0%</span>
+                                    <small>Confidence</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="result-content">
@@ -168,24 +258,34 @@
                     </div>
                 </div>
                 
-                <div class="stats-card">
+                <div class="stats-card glass reveal">
                     <h3><i class="fas fa-chart-line"></i> Quick Stats</h3>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <div class="stat-value" id="accuracyStat">95%</div>
+                            <div class="stat-value counter" data-target="95" data-suffix="%">0%</div>
                             <div class="stat-label">Detection Accuracy</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" id="responseTime">2.3s</div>
+                            <div class="stat-value counter" data-target="2.3" data-suffix="s" data-decimals="1">0s</div>
                             <div class="stat-label">Avg. Response Time</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" id="cropsSupported">25+</div>
+                            <div class="stat-value counter" data-target="25" data-suffix="+">0+</div>
                             <div class="stat-label">Crops Supported</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" id="diseasesDetected">50+</div>
+                            <div class="stat-value counter" data-target="50" data-suffix="+">0+</div>
                             <div class="stat-label">Diseases Detected</div>
+                        </div>
+                    </div>
+
+                    <!-- mini bar chart -->
+                    <div class="mini-chart-wrapper">
+                        <div class="mini-chart-header">
+                            <span>Recent Severity Levels</span>
+                        </div>
+                        <div class="mini-chart" id="miniChart">
+                            <!-- bars injected by JS -->
                         </div>
                     </div>
                     
@@ -198,7 +298,7 @@
                 </div>
             </div>
             
-            <div class="export-options">
+            <div class="export-options reveal">
                 <button class="btn-secondary" id="saveReportBtn">
                     <i class="fas fa-file-pdf"></i> Save Report
                 </button>
@@ -208,6 +308,7 @@
                 <button class="btn-secondary" id="printBtn">
                     <i class="fas fa-print"></i> Print
                 </button>
+                <span class="export-hint" id="exportHint">Generate a result first to export.</span>
             </div>
         </div>
     </section>
@@ -215,9 +316,9 @@
     <!-- About Section -->
     <section class="about-section" id="about">
         <div class="container">
-            <h2 class="section-title">About This Innovation</h2>
+            <h2 class="section-title reveal">About This Innovation</h2>
             <div class="about-content">
-                <div class="about-text">
+                <div class="about-text reveal">
                     <h3>AI-Powered Plant Disease Detection System</h3>
                     <p>This invention leverages advanced Convolutional Neural Networks (CNN) to automatically identify plant diseases from leaf images. Developed by researchers at Lovely Professional University, our system provides farmers with fast, accurate, and low-cost disease diagnosis.</p>
                     
@@ -233,15 +334,20 @@
                         </ul>
                     </div>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Agriculture Technology">
+                <div class="about-image reveal">
+                    <div class="about-card glass">
+                        <img src="https://images.unsplash.com/photo-1529528744093-6f8abeee511d?auto=format&fit=crop&w=900&q=80" alt="Agriculture Technology">
+                        <div class="about-overlay">
+                            <p><i class="fas fa-seedling"></i> Designed for sustainable agriculture</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="inventors">
+            <div class="inventors reveal">
                 <h3>Inventors</h3>
                 <div class="inventor-cards">
-                    <div class="inventor-card">
+                    <div class="inventor-card glass">
                         <div class="inventor-avatar">
                             <i class="fas fa-user-graduate"></i>
                         </div>
@@ -249,7 +355,7 @@
                         <p>UID: 12307262</p>
                         <p>Lovely Professional University</p>
                     </div>
-                    <div class="inventor-card">
+                    <div class="inventor-card glass">
                         <div class="inventor-avatar">
                             <i class="fas fa-user-graduate"></i>
                         </div>
@@ -257,7 +363,7 @@
                         <p>UID: 12324507</p>
                         <p>Lovely Professional University</p>
                     </div>
-                    <div class="inventor-card">
+                    <div class="inventor-card glass">
                         <div class="inventor-avatar">
                             <i class="fas fa-user-graduate"></i>
                         </div>
@@ -267,12 +373,86 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tech stack strip -->
+            <div class="tech-strip reveal">
+                <span class="tech-label">Tech Stack (Prototype)</span>
+                <div class="tech-icons">
+                    <span><i class="fas fa-brain"></i> Deep Learning</span>
+                    <span><i class="fas fa-network-wired"></i> CNN</span>
+                    <span><i class="fas fa-cloud"></i> Cloud API</span>
+                    <span><i class="fas fa-mobile-alt"></i> PWA Ready</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title reveal">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-header">
+                        <span>How accurate is AgriScan AI?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-body">
+                        <p>The prototype model targets detection accuracy above 95% on supported crops and diseases. Accuracy will further improve as more training data is added.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-header">
+                        <span>Do I need internet to use it?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-body">
+                        <p>Current version uses cloud processing, so internet is required. An offline-ready model is planned for low-connectivity regions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-header">
+                        <span>Which crops are supported?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-body">
+                        <p>Prototype supports key crops like tomato, potato, wheat and maize, with more crops being added over time.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-header">
+                        <span>Is this safe for small farmers?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-body">
+                        <p>Yes. The tool is designed to be simple, low-cost and mobile friendly, giving small farmers quick guidance without replacing expert agronomists.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title reveal">What People Say</h2>
+            <div class="testimonial-slider reveal">
+                <button class="slider-btn" id="prevTestimonial" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonial-track" id="testimonialTrack">
+                    <!-- slides added via JS -->
+                </div>
+                <button class="slider-btn" id="nextTestimonial" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
+        <div class="container footer-container">
             <div class="footer-content">
                 <div class="footer-logo">
                     <i class="fas fa-leaf"></i>
@@ -281,10 +461,11 @@
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#upload">Detection</a>
-                    <a href="#about">About</a>
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#upload" class="nav-link">Detection</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
                 </div>
                 <div class="footer-contact">
                     <h4>Contact</h4>
@@ -301,6 +482,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
-
